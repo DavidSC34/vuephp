@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodos</title>
+</head>
+
+<body>
+    <main id="app">
+        <h1>Calculadora</h1>
+        <input type="number" v-model="v1" placeholder="Valor 1">
+        <input type="number" v-model="v2" placeholder="Valor 2" @keyup="operacion">
+        <br>
+        <input type="radio" v-model="ope" value="suma">Suma
+        <input type="radio" v-model="ope" value="resta">Resta
+        <input type="radio" v-model="ope" value="multi">Multiplicacion
+        <input type="radio" v-model="ope" value="div">Division
+        <br>
+        <button v-on:click="operacion">Calcular</button>
+        <label for="">{{ res}}</label>
+        <br>
+        <button @click="saludo('HOla como estas?')">Saludo</button>
+        <br>
+        <input type="text" @keyup="saludo(dato)" v-model="dato">
+        <p>Lo mismo pero con enter</p>
+        <!-- Las teclas que podemos usar son: enter,tab,delete,esc, left,up,down, right -->
+        <input type="text" @keyup.enter="saludo(dato)" v-model="dato">
+        <!-- ctrl,alt,shift,meta, checnado siempre que combinaciones estan libres -->
+        <input type="text" @keyup.alt.13="saludo(dato)" v-model="dato">
+
+
+    </main>
+
+    <script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                v1: 0,
+                v2: 0,
+                res: 0,
+                ope: 0,
+                dato: ''
+
+            },
+            methods: {
+                operacion: function() {
+                    switch (this.ope) {
+                        case 'suma':
+                            this.res = parseInt(this.v1) + parseInt(this.v2);
+                            break;
+                        case 'resta':
+                            this.res = this.v1 - this.v2;
+                            break;
+                        case 'multi':
+                            this.res = this.v1 * this.v2;
+                            break;
+                        case 'div':
+                            this.res = this.v1 / this.v2;
+                            break;
+
+                        default:
+                            break;
+                    }
+                },
+                saludo: function(mensaje) {
+                    alert(mensaje);
+                    // if (event) {
+                    //     console.log(event);
+                    //     alert("Evento ejecutado")
+                    // }
+                }
+
+            }
+        });
+    </script>
+
+</body>
+
+</html>
