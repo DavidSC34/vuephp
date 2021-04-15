@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titulo</title>
+</head>
+
+<body>
+    <main id="app">
+
+            <mi-encabezado titulo="Curso" subtitulo="Desarrollo web con vue.js" :contenido="datos" alineacion="center"></mi-encabezado><br>
+            <mi-tabla :lista="personas"></mi-tabla>
+            
+    </main>
+
+    <script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>
+    <script>
+        Vue.component('mi-encabezado',{
+            props:['titulo','subtitulo','contenido','alineacion'],
+            template:`
+            <div style="width:300px;">
+               <h2>{{titulo}}</h2>
+               <h4>{{subtitulo}}</h4>
+               <p :align="alineacion">{{contenido}}</p>
+            </div>`
+        });
+        Vue.component('mi-tabla',{
+            props:['lista'],
+            template:`
+            <div>
+                <table>
+                    <th>Nobre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <tr v-for="dato in lista">
+                        <td>{{dato.nombre}}</td>
+                        <td>{{dato.direccion}}</td>
+                        <td>{{dato.telefono}}</td>
+                    </tr>
+                </table>
+            </div>`
+        });
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                datos: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde voluptatibus incidunt, ut voluptatem minima placeat laudantium esse sint quia facere doloremque provident recusandae facilis molestias explicabo! Ipsa architecto quia possimus.',
+                personas:[
+                    {nombre:'Pedro',direccion:'jardines', telefono:3223233},
+                    {nombre:'Maria',direccion:'Valle', telefono:1234567},
+                    {nombre:'Cecilia',direccion:'Perez', telefono:3223233},
+                ]
+            }
+        });
+    </script>
+
+</body>
+
+</html>
