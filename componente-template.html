@@ -26,6 +26,37 @@
         <mis-peliculas :lista="peliculas"></mis-peliculas>
     </div>
 
+    <template id="tablaPersonas">
+        <div>
+            <table>
+                <th>Nobre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <tr v-for="dato in lista">
+                    <td>{{dato.nombre}}</td>
+                    <td>{{dato.direccion}}</td>
+                    <td>{{dato.telefono}}</td>
+                </tr>
+            </table>
+        </div>
+    </template>
+    <!-- Otra foma de poner el template -->
+    <script type="text/template" id="tablaPersonas2">
+        <div>
+            <table>
+                <th>Nobre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <tr v-for="dato in lista">
+                    <td>{{dato.nombre}}</td>
+                    <td>{{dato.direccion}}</td>
+                    <td>{{dato.telefono}}</td>
+                </tr>
+            </table>
+        </div>
+    </script>
+
+
     <script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>
     <script>
         Vue.component('mi-encabezado', {
@@ -39,19 +70,8 @@
         });
         Vue.component('mi-tabla', {
             props: ['lista'],
-            template: `
-            <div>
-                <table>
-                    <th>Nobre</th>
-                    <th>Direccion</th>
-                    <th>Telefono</th>
-                    <tr v-for="dato in lista">
-                        <td>{{dato.nombre}}</td>
-                        <td>{{dato.direccion}}</td>
-                        <td>{{dato.telefono}}</td>
-                    </tr>
-                </table>
-            </div>`
+            // template: '#tablaPersonas'
+            template: '#tablaPersonas2'
         });
 
 
