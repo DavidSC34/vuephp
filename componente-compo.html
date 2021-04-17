@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componente a componente</title>
+</head>
+
+<body>
+    <main id="app">
+        <boton></boton>
+        <mensaje></mensaje>
+
+    </main>
+    <template id="miBoton">
+        <button @click="saluda">Click aqui en el primer componente</button>
+    </template>
+    <template id="miMensaje">
+        <h1>{{mensaje}}</h1>
+    </template>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>
+    <script>
+        // Componente A
+        Vue.component('boton', {
+            template: '#miBoton',
+            data() {
+                return {
+                    dato: 'Hola soy el dato de mi propio componente',
+                    parametro: 'ejecutando en el componente B'
+                }
+            },
+            methods: {
+                saluda() {
+                    alert(this.dato);
+                    puente.$emit('mi-evento', this.parametro);
+                }
+            }
+        });
+        //Otro componente B
+        Vue.component('mensaje', {
+            template: '#miMensaje',
+            data() {
+                return {
+                    mensaje: 'Hola soy el segundo componente'
+
+                }
+            },
+            created() {
+                puente.$on('mi-evento', function(parametro) {
+                    alert(parametro);
+                })
+            }
+        });
+        //Para comunicar los componente
+        const puente = new Vue();
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+
+                datos: ''
+            }
+        });
+    </script>
+
+</body>
+
+</html>
